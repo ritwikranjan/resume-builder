@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
+  get    'logout'  => 'sessions#destroy'
   get    'signup'  => 'user#new'
   post   'signup'  => 'user#create'
   get    'add_project' => 'project#new'

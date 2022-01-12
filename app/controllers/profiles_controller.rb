@@ -4,6 +4,10 @@ class ProfilesController < ApplicationController
 
     before_action :logged_in_user, only: [:update]
     before_action :correct_user,   only: [:update]
+    before_action do
+        ActiveStorage::Current.host = request.base_url
+    end
+
 
     def show
         @profile = Profile.find(params[:id])
@@ -30,7 +34,7 @@ class ProfilesController < ApplicationController
     private
         def profile_params
             params.require(:profile).permit(:name, :job_title, :total_experience, :overview, 
-                :career_highlights, :primary_skills, :secondary_skills,
+                :career_highlights, :primary_skills, :secondary_skills, :avatar,
                 :educations_attributes => [ :id, :school, :degree, :description, :start, :end, :_destroy],
                 :experiences_attributes => [
                   :id, :company, :job_title, :description, :start_date, :end_date, :_destroy,
